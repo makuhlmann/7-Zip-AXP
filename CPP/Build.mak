@@ -33,7 +33,9 @@ LFLAGS = $(LFLAGS) /ENTRY:mainACRTStartup
 !IFNDEF NEW_COMPILER
 LFLAGS = $(LFLAGS) -OPT:NOWIN98
 !ENDIF
+!IF "$(CPU)" != "ALPHA"
 CFLAGS = $(CFLAGS) -Gr
+!ENDIF
 LIBS = $(LIBS) user32.lib advapi32.lib shell32.lib
 !ENDIF
 
@@ -43,7 +45,13 @@ COMPL_ASM = $(MY_ML) $** $O/$(*B).obj
 COMPL_ASM = $(MY_ML) -c -Fo$O/ $**
 !ENDIF
 
-CFLAGS = $(CFLAGS) -nologo -c -Fo$O/ -WX -EHsc -Gy -GR-
+CFLAGS = $(CFLAGS) -nologo -c -Fo$O/ -WX -EHs -EHc -Gy
+
+!IF "$(CPU)" == "ALPHA"
+CFLAGS = $(CFLAGS) -GX
+!ELSE
+CFLAGS = $(CFLAGS) -GR-
+!ENDIF
 
 !IFDEF MY_STATIC_LINK
 !IFNDEF MY_SINGLE_THREAD

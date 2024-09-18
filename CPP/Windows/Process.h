@@ -42,7 +42,7 @@ public:
   bool ReadMemory(LPCVOID baseAddress, LPVOID buffer, SIZE_T size, SIZE_T* numberOfBytesRead)
     { return BOOLToBool(::ReadProcessMemory(_handle, baseAddress, buffer, size, numberOfBytesRead));  }
 
-  bool WriteMemory(LPVOID baseAddress, LPCVOID buffer, SIZE_T size, SIZE_T* numberOfBytesWritten)
+  bool WriteMemory(LPVOID baseAddress, LPVOID buffer, SIZE_T size, SIZE_T* numberOfBytesWritten)
     { return BOOLToBool(::WriteProcessMemory(_handle, baseAddress, buffer, size, numberOfBytesWritten)); }
 
   bool FlushInstructionCache(LPCVOID baseAddress = 0, SIZE_T size = 0)
